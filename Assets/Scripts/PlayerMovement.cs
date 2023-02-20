@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
         // Jump
         if (canJump && Input.GetButtonDown("Jump") && Math.Abs(GetComponent<Rigidbody2D>().velocity.y) < 0.001f)
         {
-            Debug.Log("Jump");
             GetComponent<Rigidbody2D>().AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
         }
 
@@ -45,13 +44,11 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) 
      {
-        Debug.Log("Collision");
-         canJump = true;
+        canJump = true;
      }
  
     void OnCollisionExit2D(Collision2D other) 
     {
-        Debug.Log("Collision Exit");
         canJump = false;
     }
 

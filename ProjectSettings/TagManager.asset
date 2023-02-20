@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Ground
   - PassThrough Ground
+  - Blast Zone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Platform
   - Water
   - UI
   - 
