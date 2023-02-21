@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133816, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 462281824338133822, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -289,6 +293,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5218917692554002543, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917692554004368, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.1254895
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917692554004368, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.1254895
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917692554004368, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5660378
+      objectReference: {fileID: 0}
     - target: {fileID: 5218917694241085053, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
       propertyPath: m_Name
       value: Grid
@@ -398,6 +418,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlastZone (0)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6451192847731365842, guid: f1724388c860e4f6eb5b06013aedc073, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1724388c860e4f6eb5b06013aedc073, type: 3}
