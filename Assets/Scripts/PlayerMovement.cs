@@ -85,8 +85,6 @@ public class PlayerMovement : MonoBehaviour
             case InputActionPhase.Performed:
                 if(controller.isGrounded) {
                     rb.AddForce(Vector3.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
-                } else if (controller.wallCling) {
-                    rb.AddForce(Vector3.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
                 }
                 break;
             case InputActionPhase.Canceled:

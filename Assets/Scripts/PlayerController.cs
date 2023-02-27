@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
-
         foreach(LayerMask wall in whatIsWall)
         {
             isLeftWall = Physics2D.OverlapCircle(leftWallCheck.position, wallRadius, wall);
@@ -79,21 +78,11 @@ public class PlayerController : MonoBehaviour
     {
         switch (context.phase)
         {
-            case InputActionPhase.Started:
-                break;
             case InputActionPhase.Performed:
-                if(isGrounded) {
-                    gameObject.layer = (int) Layers.PassThroughPlatform;
-                } else if (wallCling) {
-                    gameObject.layer = (int) Layers.PassThroughPlatform;
-                }
-                break;
             case InputActionPhase.Canceled:
                 if(isGrounded) {
                     gameObject.layer = (int) Layers.PassThroughPlatform;
                 }
-                break;
-            default:
                 break;
         }
     }
