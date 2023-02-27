@@ -12,25 +12,13 @@ public class PlayerMovement : MonoBehaviour
     public float maxAirSpeed;
 
     public float speed = 5f;
-    public bool wallCling = false;
-
-
-    [HideInInspector]
-    public bool jumping = false;
     [SerializeField]
     private Rigidbody2D rb;
 
-    public bool isGrounded = false;
-    public Transform groundCheck;
-    float groundRadius = 0.2f;
-    public List<LayerMask> whatIsGround;
     private Vector3 moveAmount;
 
     public InputActionAsset actions;
-
-    private InputAction moveAction;
-    private InputAction jumpAction;
-    private InputAction rollAction;
+    public PlayerController controller;
 
     public void Awake()
     {
@@ -57,30 +45,11 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        foreach(LayerMask ground in whatIsGround)
-        {
-            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, ground);
-            if (isGrounded)
-            {
-                break;
-            }
-        }
-        
         rb.AddForce(moveAmount * speed, ForceMode2D.Impulse);
-
-        float x = rb.velocity.x;
-        
-        float yVelocity = rb.velocity.y;
-
-        if (yVelocity <= 0)
-        {
-            gameObject.layer = (int) Layers.Player;
-        } 
-
     }
 
     void LateUpdate() {
-        if(isGrounded) {
+        if(controller.isGrounded) {
             Vector3 clampedMagnitude = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
             rb.velocity = new Vector3(clampedMagnitude.x, rb.velocity.y, 0);
         } else {
@@ -109,20 +78,19 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Debug.Log(context.phase);
         switch (context.phase)
         {
             case InputActionPhase.Started:
                 break;
             case InputActionPhase.Performed:
-                if(isGrounded) {
-                    gameObject.layer = (int) Layers.PassThroughPlatform;
+                if(controller.isGrounded) {
+                    rb.AddForce(Vector3.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
+                } else if (controller.wallCling) {
                     rb.AddForce(Vector3.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
                 }
                 break;
             case InputActionPhase.Canceled:
-                if(isGrounded) {
-                    gameObject.layer = (int) Layers.PassThroughPlatform;
+                if(controller.isGrounded) {
                     rb.AddForce(Vector3.up * Mathf.Sqrt(minJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
                 }
                 break;
@@ -130,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }
-        
 
     public void OnRoll(InputAction.CallbackContext context)
     {
@@ -139,20 +106,4 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(moveAmount * 10, ForceMode2D.Impulse);
         }
     }
-
-    void OnCollisionEnter2D(Collision2D other) 
-    {
-        if (jumping) {
-            jumping = false;
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D other) 
-    {
-        if (other.gameObject.layer == (int) Layers.Wall)
-        {
-            wallCling = false;
-        }
-    }
-
 }
