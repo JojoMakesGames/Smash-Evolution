@@ -5,5 +5,6 @@ enum Layers {
     Water = 4,
     UI = 5,
     Player = 9,
-    PassTrhoughPlatform = 10
+    PassThroughPlatform = 10,
+    Wall = 11
 }

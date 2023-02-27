@@ -232,13 +232,73 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1054928305, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 462281824338133816, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 462281824338133816, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 8d3f2e0d38d6145ff975a2362adddfca, type: 3}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: maxSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: jumpHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: jumpAction.m_Id
+      value: e46b26fb-daa9-41e6-81a3-734df519c86c
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: moveAction.m_Id
+      value: 5ce3b294-5fde-4818-9232-73423abf4058
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: rollAction.m_Id
+      value: 93432a04-b6de-4926-8a1e-1dafe6f6fc5d
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: inputActionAsset
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 8d3f2e0d38d6145ff975a2362adddfca, type: 3}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: jumpAction.m_Name
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: moveAction.m_Name
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: rollAction.m_Name
+      value: Roll
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 8fe767fb-f09c-484e-bf0d-b0479a298eb9
+      objectReference: {fileID: 0}
+    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: moveAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Move
       objectReference: {fileID: 0}
     - target: {fileID: 462281824338133822, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_RootOrder
@@ -309,9 +369,57 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.5660378
       objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_CompositePaths.m_Paths.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[0].X
+      value: -70000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[0].Y
+      value: -80000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[1].X
+      value: 70000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[1].Y
+      value: -80000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[2].X
+      value: 70000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[2].Y
+      value: -20000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[3].X
+      value: -70000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304597, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[0].Array.data[3].Y
+      value: -20000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694229304815, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 5218917694241085053, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
       propertyPath: m_Name
       value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917694241085053, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5218917694241085055, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
       propertyPath: m_RootOrder

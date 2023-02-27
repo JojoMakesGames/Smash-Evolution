@@ -2,65 +2,156 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float jumpHeight = 3f;
-    public float speed = 1f;
-    public bool canJump = false;
+    public float maxJumpHeight = 3f;
+    public float minJumpHeight = 3f;
+    public float maxSpeed = 5f;
+    public float maxAirSpeed;
+
+    public float speed = 5f;
+    public bool wallCling = false;
+
+
+    [HideInInspector]
     public bool jumping = false;
+    [SerializeField]
+    private Rigidbody2D rb;
 
-    // Update is called once per frame
-    void Update()
+    public bool isGrounded = false;
+    public Transform groundCheck;
+    float groundRadius = 0.2f;
+    public List<LayerMask> whatIsGround;
+    private Vector3 moveAmount;
+
+    public InputActionAsset actions;
+
+    private InputAction moveAction;
+    private InputAction jumpAction;
+    private InputAction rollAction;
+
+    public void Awake()
     {
-        // Get the input from the player
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        var playerActions = actions.FindActionMap("player");
+        playerActions.FindAction("jump").started += OnJump;
+        playerActions.FindAction("jump").performed += OnJump;
+        playerActions.FindAction("jump").canceled += OnJump;
 
-        // Get the player's z velocity
-        float zVelocity = GetComponent<Rigidbody2D>().velocity.y;
-        if (zVelocity > 0 && jumping)
+        playerActions.FindAction("move").performed += OnMove;
+        playerActions.FindAction("move").canceled += OnMove;
+        
+        playerActions.FindAction("roll").performed += OnRoll;
+    }
+
+    public void OnEnable()
+    {
+        actions.FindActionMap("player").Enable();
+    }
+
+    public void OnDisable()
+    {
+        actions.FindActionMap("player").Disable();
+    }
+
+    void FixedUpdate()
+    {
+        foreach(LayerMask ground in whatIsGround)
         {
-            gameObject.layer = (int) Layers.PassTrhoughPlatform;
-        } else
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, ground);
+            if (isGrounded)
+            {
+                break;
+            }
+        }
+        
+        rb.AddForce(moveAmount * speed, ForceMode2D.Impulse);
+
+        float x = rb.velocity.x;
+        
+        float yVelocity = rb.velocity.y;
+
+        if (yVelocity <= 0)
         {
             gameObject.layer = (int) Layers.Player;
+        } 
+
+    }
+
+    void LateUpdate() {
+        if(isGrounded) {
+            Vector3 clampedMagnitude = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
+            rb.velocity = new Vector3(clampedMagnitude.x, rb.velocity.y, 0);
+        } else {
+            Vector3 clampedMagnitude = Vector3.ClampMagnitude(rb.velocity, maxAirSpeed);
+            rb.velocity = new Vector3(clampedMagnitude.x, rb.velocity.y, 0);
         }
+    }
 
-        // Move the player
-        Vector3 move = transform.right * x + transform.up * z;
-        transform.position += move * speed * Time.deltaTime;
-
-        // Jump
-        if (canJump && Input.GetButtonDown("Jump") && Math.Abs(GetComponent<Rigidbody2D>().velocity.y) < 0.001f)
-        {
-            jumping = true;
-            GetComponent<Rigidbody2D>().AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        switch(context.phase) {
+            case InputActionPhase.Started:
+                break;
+            case InputActionPhase.Performed:
+                Vector2 readMove = context.ReadValue<Vector2>();
+                moveAmount = new Vector3(readMove.x, 0, 0);
+                break;
+            case InputActionPhase.Canceled:
+                moveAmount = Vector3.zero;
+                break;
+            default:
+                break;
         }
+    }
 
-        // Roll
-        if (Input.GetButtonDown("Shield"))
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        Debug.Log(context.phase);
+        switch (context.phase)
         {
-            Debug.Log("Shield");
-            if(x != 0) {
-                GetComponent<Rigidbody2D>().AddForce(move * 10, ForceMode2D.Impulse);
-            }
+            case InputActionPhase.Started:
+                break;
+            case InputActionPhase.Performed:
+                if(isGrounded) {
+                    gameObject.layer = (int) Layers.PassThroughPlatform;
+                    rb.AddForce(Vector3.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
+                }
+                break;
+            case InputActionPhase.Canceled:
+                if(isGrounded) {
+                    gameObject.layer = (int) Layers.PassThroughPlatform;
+                    rb.AddForce(Vector3.up * Mathf.Sqrt(minJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+        
+
+    public void OnRoll(InputAction.CallbackContext context)
+    {
+        float x = rb.velocity.x;
+        if(x != 0) {
+            rb.AddForce(moveAmount * 10, ForceMode2D.Impulse);
         }
     }
 
     void OnCollisionEnter2D(Collision2D other) 
-     {
+    {
         if (jumping) {
             jumping = false;
         }
-        canJump = true;
-     }
- 
+    }
+
     void OnCollisionExit2D(Collision2D other) 
     {
-        if (gameObject.layer == (int) Layers.Player)
+        if (other.gameObject.layer == (int) Layers.Wall)
         {
-            canJump = false;
+            wallCling = false;
         }
     }
 
