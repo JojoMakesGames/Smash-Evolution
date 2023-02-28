@@ -200,7 +200,11 @@ MonoBehaviour:
   minJumpHeight: 3
   maxSpeed: 10
   maxAirSpeed: 10
-  stopping: 0
+  gravityScaleMultiplier: 2
+  acceleration: 7
+  jumpCutMultiplier: 0.4
+  frictionAmount: 0.2
+  doubleJumps: 1
   speed: 40
   rb: {fileID: 462281824338133823}
   actions: {fileID: -944628639613478452, guid: 8d3f2e0d38d6145ff975a2362adddfca, type: 3}
@@ -215,7 +219,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 462281824338133816}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
