@@ -10,12 +10,13 @@ public class PlayerMovement : MonoBehaviour
     public float minJumpHeight = 3f;
     public float maxSpeed = 5f;
     public float maxAirSpeed;
+    public bool stopping;
 
     public float speed = 5f;
     [SerializeField]
     private Rigidbody2D rb;
 
-    private Vector3 moveAmount;
+    private Vector2 moveAmount;
 
     public InputActionAsset actions;
     public PlayerController controller;
@@ -45,63 +46,65 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(moveAmount * speed, ForceMode2D.Impulse);
+        if (stopping && rb.velocity.x != 0)
+        {
+            rb.AddForce(new Vector2(-1 * rb.velocity.x, 0), ForceMode2D.Force);
+        }
+        if(rb.velocity.x <= 1) {
+            stopping = false;
+        }
+        
+        rb.AddForce(moveAmount * speed, ForceMode2D.Force);
     }
 
     void LateUpdate() {
-        if(controller.isGrounded) {
-            Vector3 clampedMagnitude = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
-            rb.velocity = new Vector3(clampedMagnitude.x, rb.velocity.y, 0);
-        } else {
-            Vector3 clampedMagnitude = Vector3.ClampMagnitude(rb.velocity, maxAirSpeed);
-            rb.velocity = new Vector3(clampedMagnitude.x, rb.velocity.y, 0);
-        }
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxSpeed, maxSpeed), Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed));
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        switch(context.phase) {
-            case InputActionPhase.Started:
-                break;
-            case InputActionPhase.Performed:
-                Vector2 readMove = context.ReadValue<Vector2>();
-                moveAmount = new Vector3(readMove.x, 0, 0);
-                break;
-            case InputActionPhase.Canceled:
-                moveAmount = Vector3.zero;
-                break;
-            default:
-                break;
+        stopping = false;
+        Vector2 readMove = context.ReadValue<Vector2>();
+        moveAmount = new Vector2(readMove.x, 0);
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            stopping = true;
         }
     }
 
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        switch (context.phase)
-        {
-            case InputActionPhase.Started:
-                break;
-            case InputActionPhase.Performed:
-                if(controller.isGrounded) {
-                    rb.AddForce(Vector3.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
-                }
-                break;
-            case InputActionPhase.Canceled:
-                if(controller.isGrounded) {
-                    rb.AddForce(Vector3.up * Mathf.Sqrt(minJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
-                }
-                break;
-            default:
-                break;
+        Debug.Log(context.phase);
+        if(controller.isGrounded) {
+            Vector2 jumpforce = new Vector2(0, Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y));
+            Debug.Log(jumpforce);
+            rb.AddForce(jumpforce, ForceMode2D.Impulse);
         }
+        // switch (context.phase)
+        // {
+        //     case InputActionPhase.Started:
+        //         break;
+        //     case InputActionPhase.Performed:
+        //         if(controller.isGrounded) {
+        //             rb.AddForce(Vector2.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
+        //         }
+        //         break;
+        //     case InputActionPhase.Canceled:
+        //         if(controller.isGrounded) {
+        //             rb.AddForce(Vector2.up * Mathf.Sqrt(minJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
+        //         }
+        //         break;
+        //     default:
+        //         break;
+        // }
     }
 
     public void OnRoll(InputAction.CallbackContext context)
     {
-        float x = rb.velocity.x;
-        if(x != 0) {
-            rb.AddForce(moveAmount * 10, ForceMode2D.Impulse);
-        }
+        // float x = rb.velocity.x;
+        // if(x != 0) {
+        //     rb.AddForce(moveAmount * 10, ForceMode2D.Impulse);
+        // }
     }
 }

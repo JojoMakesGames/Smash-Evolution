@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, ground);
             if (isGrounded)
             {
+                rb.gravityScale = 1;
                 break;
             }
         }
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour
 
         if (yVelocity <= 0)
         {
+            rb.gravityScale = 2;
             gameObject.layer = (int) Layers.Player;
         } 
 
