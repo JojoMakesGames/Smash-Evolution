@@ -10,7 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public float minJumpHeight = 3f;
     public float maxSpeed = 5f;
     public float maxAirSpeed;
-    public bool stopping;
+    public float gravityScaleMultiplier;
+    public float acceleration;
+    public float jumpCutMultiplier;
+
 
     public float speed = 5f;
     [SerializeField]
@@ -20,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     public InputActionAsset actions;
     public PlayerController controller;
+    private InputAction moveAction;
+    
 
     public void Awake()
     {
@@ -28,8 +33,9 @@ public class PlayerMovement : MonoBehaviour
         playerActions.FindAction("jump").performed += OnJump;
         playerActions.FindAction("jump").canceled += OnJump;
 
-        playerActions.FindAction("move").performed += OnMove;
-        playerActions.FindAction("move").canceled += OnMove;
+        moveAction = playerActions.FindAction("move");
+        moveAction.performed += OnMove;
+        moveAction.canceled += OnMove;
         
         playerActions.FindAction("roll").performed += OnRoll;
     }
@@ -46,32 +52,25 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (stopping && rb.velocity.x != 0)
-        {
-            rb.AddForce(new Vector2(-1 * rb.velocity.x, 0), ForceMode2D.Force);
-        }
-        if(rb.velocity.x <= 1) {
-            stopping = false;
-        }
         float targetSpeed = moveAmount.x * maxSpeed;
         float speedDiff = targetSpeed - rb.velocity.x;
-        float movement = Mathf.Pow(Math.Abs(speedDiff) * 7, 0.9f) * Mathf.Sign(speedDiff);
+        float movement = Mathf.Pow(Math.Abs(speedDiff) * acceleration, 0.9f) * Mathf.Sign(speedDiff);
         if (rb.velocity.y < 0) {
-            rb.gravityScale = 3;
+            rb.gravityScale = gravityScaleMultiplier;
         }
         
         rb.AddForce(Vector2.right * movement);
+        if(controller.isGrounded && !moveAction.inProgress){
+            float amount = Mathf.Min(Mathf.Abs(rb.velocity.x), .2f);
+            amount *= Mathf.Sign(rb.velocity.x);
+            rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        stopping = false;
         Vector2 readMove = context.ReadValue<Vector2>();
         moveAmount = new Vector2(readMove.x, 0);
-        if (context.phase == InputActionPhase.Canceled)
-        {
-            stopping = true;
-        }
     }
 
 
@@ -85,29 +84,11 @@ public class PlayerMovement : MonoBehaviour
                 }
                 break;
             case InputActionPhase.Canceled:
-                rb.AddForce(Vector2.down * rb.velocity.y * (1 - .6f), ForceMode2D.Impulse);
+                rb.AddForce(Vector2.down * rb.velocity.y * (1 - jumpCutMultiplier), ForceMode2D.Impulse);
                 break;
             default:
                 break;
         }
-        
-        // switch (context.phase)
-        // {
-        //     case InputActionPhase.Started:
-        //         break;
-        //     case InputActionPhase.Performed:
-        //         if(controller.isGrounded) {
-        //             rb.AddForce(Vector2.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
-        //         }
-        //         break;
-        //     case InputActionPhase.Canceled:
-        //         if(controller.isGrounded) {
-        //             rb.AddForce(Vector2.up * Mathf.Sqrt(minJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
-        //         }
-        //         break;
-        //     default:
-        //         break;
-        // }
     }
 
     public void OnRoll(InputAction.CallbackContext context)
