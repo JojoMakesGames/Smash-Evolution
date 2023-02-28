@@ -53,12 +53,14 @@ public class PlayerMovement : MonoBehaviour
         if(rb.velocity.x <= 1) {
             stopping = false;
         }
+        float targetSpeed = moveAmount.x * maxSpeed;
+        float speedDiff = targetSpeed - rb.velocity.x;
+        float movement = Mathf.Pow(Math.Abs(speedDiff) * 7, 0.9f) * Mathf.Sign(speedDiff);
+        if (rb.velocity.y < 0) {
+            rb.gravityScale = 3;
+        }
         
-        rb.AddForce(moveAmount * speed, ForceMode2D.Force);
-    }
-
-    void LateUpdate() {
-        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxSpeed, maxSpeed), Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed));
+        rb.AddForce(Vector2.right * movement);
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -75,12 +77,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Debug.Log(context.phase);
-        if(controller.isGrounded) {
-            Vector2 jumpforce = new Vector2(0, Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y));
-            Debug.Log(jumpforce);
-            rb.AddForce(jumpforce, ForceMode2D.Impulse);
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                if(controller.isGrounded) {
+                    rb.AddForce(Vector2.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
+                }
+                break;
+            case InputActionPhase.Canceled:
+                rb.AddForce(Vector2.down * rb.velocity.y * (1 - .6f), ForceMode2D.Impulse);
+                break;
+            default:
+                break;
         }
+        
         // switch (context.phase)
         // {
         //     case InputActionPhase.Started:

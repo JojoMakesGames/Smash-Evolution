@@ -55,22 +55,9 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
-        if (isLeftWall || isRightWall)
-        {
 
-            Debug.Log("Wall");
-            wallCling = true;
-        }
-        else
+        if (rb.velocity.y <= 0)
         {
-            wallCling = false;
-        }
-        
-        float yVelocity = rb.velocity.y;
-
-        if (yVelocity <= 0)
-        {
-            rb.gravityScale = 2;
             gameObject.layer = (int) Layers.Player;
         } 
 
@@ -79,7 +66,8 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         switch (context.phase)
-        {
+        {   
+            case InputActionPhase.Started:
             case InputActionPhase.Performed:
             case InputActionPhase.Canceled:
                 if(isGrounded) {
