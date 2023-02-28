@@ -214,21 +214,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1104274266, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645700250, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 462281824338133816, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: acceleration
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: jumpCutMultiplier
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: gravityScaleMultiplier
-      value: 2
+      propertyPath: wallClingGravity
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 462281824338133822, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_RootOrder
@@ -273,14 +273,6 @@ PrefabInstance:
     - target: {fileID: 462281824338133822, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133823, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133823, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: m_UseFullKinematicContacts
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
