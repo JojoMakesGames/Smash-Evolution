@@ -276,7 +276,7 @@
                     "name": "",
                     "id": "db09ffc4-f026-46c6-bea5-1c84138cf88f",
                     "path": "<Keyboard>/space",
-                    "interactions": "Hold(duration=0.1,pressPoint=1.401298E-45)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",

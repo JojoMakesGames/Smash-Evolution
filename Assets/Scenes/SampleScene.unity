@@ -214,37 +214,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1104274266, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1645700250, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 462281824338133816, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: speed
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: maxSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: controller
-      value: 
-      objectReference: {fileID: 857406206}
-    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: maxJumpHeight
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: minJumpHeight
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: timeToJumpApex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133820, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: groundAcceleration
-      value: 5
+      propertyPath: wallClingGravity
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 462281824338133822, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_RootOrder
@@ -290,85 +274,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133823, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133823, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133823, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: m_GravityScale
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 462281824338133823, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: m_UseFullKinematicContacts
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7141651377136487260, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-      propertyPath: actions
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 8d3f2e0d38d6145ff975a2362adddfca, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
---- !u!1 &857406201 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 462281824338133816, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-  m_PrefabInstance: {fileID: 857406200}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &857406202 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1645700250, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-  m_PrefabInstance: {fileID: 857406200}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &857406203 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1104274266, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-  m_PrefabInstance: {fileID: 857406200}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &857406204 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1054928306, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-  m_PrefabInstance: {fileID: 857406200}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &857406205 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 462281824338133823, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
-  m_PrefabInstance: {fileID: 857406200}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &857406206
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 857406201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c554a83f4fd5f4f57acbff3c0a3dd373, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallCling: 0
-  jumping: 0
-  rb: {fileID: 857406205}
-  isGrounded: 0
-  groundCheck: {fileID: 857406204}
-  leftWallCheck: {fileID: 857406203}
-  rightWallCheck: {fileID: 857406202}
-  isLeftWall: 0
-  isRightWall: 0
-  wallRadius: 0.2
-  groundRadius: 0.2
-  whatIsGround:
-  - serializedVersion: 2
-    m_Bits: 4096
-  - serializedVersion: 2
-    m_Bits: 256
-  whatIsWall:
-  - serializedVersion: 2
-    m_Bits: 2048
-  actions: {fileID: -944628639613478452, guid: 8d3f2e0d38d6145ff975a2362adddfca, type: 3}
 --- !u!19719996 &1628995423 stripped
 TilemapCollider2D:
   m_CorrespondingSourceObject: {fileID: 5218917694229304596, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
