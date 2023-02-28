@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float gravityScaleMultiplier;
     public float acceleration;
     public float jumpCutMultiplier;
+    public float frictionAmount;
+    public int doubleJumps;
 
 
     public float speed = 5f;
@@ -52,6 +54,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (controller.isGrounded) {
+            doubleJumps = 1;
+        }
         float targetSpeed = moveAmount.x * maxSpeed;
         float speedDiff = targetSpeed - rb.velocity.x;
         float movement = Mathf.Pow(Math.Abs(speedDiff) * acceleration, 0.9f) * Mathf.Sign(speedDiff);
@@ -61,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         
         rb.AddForce(Vector2.right * movement);
         if(controller.isGrounded && !moveAction.inProgress){
-            float amount = Mathf.Min(Mathf.Abs(rb.velocity.x), .2f);
+            float amount = Mathf.Min(Mathf.Abs(rb.velocity.x), frictionAmount);
             amount *= Mathf.Sign(rb.velocity.x);
             rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
         }
@@ -81,6 +86,10 @@ public class PlayerMovement : MonoBehaviour
             case InputActionPhase.Performed:
                 if(controller.isGrounded) {
                     rb.AddForce(Vector2.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
+                } else if (doubleJumps > 0) {
+                    rb.velocity = new Vector2(rb.velocity.x, 0);
+                    rb.AddForce(Vector2.up * Mathf.Sqrt(maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
+                    doubleJumps--;
                 }
                 break;
             case InputActionPhase.Canceled:
