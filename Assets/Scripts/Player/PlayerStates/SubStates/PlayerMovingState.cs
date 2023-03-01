@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingState : GroundedState
+public class PlayerMovingState : PlayerGroundedState
 {
     private float targetSpeed;
     private float speedDiff;
     private float movement;
     private float frictionAmount;
-    public MovingState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName) {
+    public PlayerMovingState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName) {
     }
     public override void Enter() {
         base.Enter();
         Debug.Log("MovingState");
     }
     
-    public override void Exit() {
-        base.Exit();
-    }
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
         targetSpeed = playerData.maxSpeed * player.InputHandler.XInput;

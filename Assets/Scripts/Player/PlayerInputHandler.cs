@@ -7,6 +7,9 @@ public class PlayerInputHandler : MonoBehaviour
 {
     public Vector2 RawMovementInput { get; private set; }
     public float XInput { get { return RawMovementInput.x; } }
+    public bool JumpingInput { get; private set; }
+    public bool IsJumping { get; private set; }
+    public bool JumpInputStop { get; private set; }
 
 
     // Update is called once per frame
@@ -24,6 +27,18 @@ public class PlayerInputHandler : MonoBehaviour
     }
 
     public void OnJump(InputAction.CallbackContext context) {
-        Debug.Log("OnJump");
+        if (context.performed) {
+            JumpingInput = true;
+            IsJumping = true;
+            JumpInputStop = false;
+        }
+        if (context.canceled) {
+            JumpInputStop = true;
+        }
     }
+
+    public void UseJumpInput() {
+        JumpingInput = false;
+    }
+
 }

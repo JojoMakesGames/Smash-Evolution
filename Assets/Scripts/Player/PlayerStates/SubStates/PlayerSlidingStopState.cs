@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlidingStopState : GroundedState
+public class PlayerSlidingStopState : PlayerGroundedState
 {
     private float frictionAmount;
-    public SlidingStopState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName) {
+    public PlayerSlidingStopState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName) {
     }
     public override void Enter() {
         base.Enter();
         Debug.Log("SlidingStopState");
     }
-    
-    public override void Exit() {
-        base.Exit();
-    }
+
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
         frictionAmount = Mathf.Min(Mathf.Abs(player.RB.velocity.x), playerData.friction);

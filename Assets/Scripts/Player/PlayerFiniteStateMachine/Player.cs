@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
 {
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
-
     public List<LayerMask> WhatIsGround;
     public Transform GroundCheck;
     public float GroundCheckRadius;
@@ -15,9 +14,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerData playerData;
 
-    public IdleState IdleState { get; private set; }
-    public MovingState MovingState { get; private set; } 
-    public SlidingStopState SlidingStopState { get; private set; }
+    public PlayerIdleState IdleState { get; private set; }
+    public PlayerMovingState MovingState { get; private set; } 
+    public PlayerSlidingStopState SlidingStopState { get; private set; }
+    public PlayerInAirState InAirState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
 
     public bool IsGrounded { get  {
         foreach (LayerMask layer in WhatIsGround)
@@ -29,15 +30,19 @@ public class Player : MonoBehaviour
         }
         return false;
     } }
+    public Vector2 CurrentVelocity { get { return RB.velocity; }}
+
 
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
         StateMachine = new PlayerStateMachine();
         InputHandler = GetComponent<PlayerInputHandler>();
-        IdleState = new IdleState(this, playerData, "idle");
-        MovingState = new MovingState(this, playerData, "move");
-        SlidingStopState = new SlidingStopState(this, playerData, "slideStop");
+        IdleState = new PlayerIdleState(this, playerData, "idle");
+        MovingState = new PlayerMovingState(this, playerData, "move");
+        SlidingStopState = new PlayerSlidingStopState(this, playerData, "slideStop");
+        InAirState = new PlayerInAirState(this, playerData, "inAir");
+        JumpState = new PlayerJumpState(this, playerData, "jump");
         StateMachine.Initialize(IdleState);
     }
 

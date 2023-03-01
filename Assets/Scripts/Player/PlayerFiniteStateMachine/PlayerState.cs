@@ -23,6 +23,7 @@ public class PlayerState
         Debug.Log("Exit");
     }
     public virtual void PhysicsUpdate() {
+        DoChecks();
     }
     public virtual void LogicUpdate() {
     }

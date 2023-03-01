@@ -338,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 462281824338133822, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: -1.74
       objectReference: {fileID: 0}
     - target: {fileID: 462281824338133822, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
       propertyPath: m_LocalPosition.z
@@ -530,7 +530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf88fb12123f45d5a88c8e551e8a1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerData: {fileID: 0}
   WhatIsGround:
   - serializedVersion: 2
     m_Bits: 4096
@@ -538,6 +537,7 @@ MonoBehaviour:
     m_Bits: 256
   GroundCheck: {fileID: 592362512}
   GroundCheckRadius: 0.2
+  playerData: {fileID: 11400000, guid: 04a648a1321874cd784fce8246a2ca6f, type: 2}
 --- !u!19719996 &1628995423 stripped
 TilemapCollider2D:
   m_CorrespondingSourceObject: {fileID: 5218917694229304596, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
@@ -646,6 +646,10 @@ PrefabInstance:
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[2].Array.data[3].X
       value: 70000000
       objectReference: {fileID: 0}
+    - target: {fileID: 3131383225862623851, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_Simulated
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3532521092867618859, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
       propertyPath: m_BodyType
       value: 2
@@ -665,6 +669,10 @@ PrefabInstance:
     - target: {fileID: 5218917692554004368, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
       propertyPath: m_Color.r
       value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218917693237363548, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5218917694229304595, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
       propertyPath: m_Tiles.Array.size

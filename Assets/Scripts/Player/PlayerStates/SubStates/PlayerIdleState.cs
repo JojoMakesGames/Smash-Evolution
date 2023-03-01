@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : GroundedState
+public class PlayerIdleState : PlayerGroundedState
 {
-    public IdleState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName) {
+    public PlayerIdleState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName) {
     }
     public override void Enter() {
         base.Enter();

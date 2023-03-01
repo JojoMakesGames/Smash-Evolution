@@ -8,12 +8,14 @@ public class PlayerData : ScriptableObject
     [Header("Move State")]
     public float movementVelocity = 5f;
     public float maxSpeed = 10f;
-    public float acceleration = 0.1f;
+    public float acceleration = 6f;
     public float friction = .2f;
 
     [Header("Jump State")]
     public float jumpVelocity = 15f;
+    public float maxJumpHeight = 6f;
     public int amountOfJumps = 1;
+    public float jumpCutMultiplier = .1f;
 
     [Header("Wall Jump State")]
     public float wallJumpVelocity = 20;
@@ -24,6 +26,10 @@ public class PlayerData : ScriptableObject
     public float coyoteTime = 0.2f;
     public float variableJumpHeightMultiplier = 0.5f;
     public float airMovementVelocity = 15f;
+    public float fallMultiplier = 2.5f;
+    public float gravityScale = 1f;
+    public float maxAirSpeed = 10f;
+    public float minJumpTime = 0.15f;
 
     [Header("Wall Slide State")]
     public float wallSlideVelocity = 3f;
