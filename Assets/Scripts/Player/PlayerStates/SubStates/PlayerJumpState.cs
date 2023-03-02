@@ -14,7 +14,6 @@ public class PlayerJumpState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Entered Jump State");
         player.InputHandler.UseJumpInput();
         workspace = player.CurrentVelocity;
         workspace.y = 0;

@@ -7,10 +7,6 @@ public class PlayerSlidingStopState : PlayerGroundedState
     private float frictionAmount;
     public PlayerSlidingStopState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName) {
     }
-    public override void Enter() {
-        base.Enter();
-        Debug.Log("SlidingStopState");
-    }
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();

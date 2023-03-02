@@ -25,8 +25,6 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        
-        Debug.Log("Entered Grounded State");
     }
 
     public override void Exit()
@@ -37,6 +35,11 @@ public class PlayerGroundedState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (player.InputHandler.XInput > 0 && !player.FacingRight) {
+            player.Flip();
+        } else if (player.InputHandler.XInput < 0 && player.FacingRight) {
+            player.Flip();
+        }
         if(player.InputHandler.JumpingInput) {
             stateMachine.ChangeState(player.JumpState);
         }

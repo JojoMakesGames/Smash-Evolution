@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public PlayerStateMachine StateMachine { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
+    public bool FacingRight { get; private set; }
     public List<LayerMask> WhatIsGround;
     public Transform GroundCheck;
     public float GroundCheckRadius;
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     public Transform ReftWallCheck;
     public float WallCheckRadius;
     public Rigidbody2D RB { get; private set; }
+    public Animator Anim { get; private set; }
 
     [SerializeField]
     private PlayerData playerData;
@@ -56,7 +58,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        FacingRight = true;
         RB = GetComponent<Rigidbody2D>();
+        Anim = GetComponent<Animator>();
         StateMachine = new PlayerStateMachine();
         InputHandler = GetComponent<PlayerInputHandler>();
         IdleState = new PlayerIdleState(this, playerData, "idle");
@@ -69,14 +73,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("StateMachine: " + StateMachine);
-        Debug.Log("CurrentState: " + StateMachine.CurrentState);
         StateMachine.CurrentState.LogicUpdate();
     }
 
     void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+    }
+
+    public void Flip()
+    {
+        FacingRight = !FacingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 
 }

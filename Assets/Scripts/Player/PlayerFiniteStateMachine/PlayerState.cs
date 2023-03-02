@@ -18,15 +18,15 @@ public class PlayerState
 
     public virtual void Enter(){
         startTime = Time.time;
+        player.Anim.SetBool(animBoolName, true);
     }
     public virtual void Exit() {
-        Debug.Log("Exit");
+        player.Anim.SetBool(animBoolName, false);
     }
     public virtual void PhysicsUpdate() {
         DoChecks();
     }
-    public virtual void LogicUpdate() {
-    }
+    public virtual void LogicUpdate() { }
 
     public virtual void DoChecks() { }
 }

@@ -10,11 +10,7 @@ public class PlayerMovingState : PlayerGroundedState
     private float frictionAmount;
     public PlayerMovingState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName) {
     }
-    public override void Enter() {
-        base.Enter();
-        Debug.Log("MovingState");
-    }
-    
+
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
         targetSpeed = playerData.maxSpeed * player.InputHandler.XInput;

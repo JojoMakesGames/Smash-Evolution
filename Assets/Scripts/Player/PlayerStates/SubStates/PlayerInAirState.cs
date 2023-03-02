@@ -26,8 +26,9 @@ public class PlayerInAirState : PlayerState
         base.LogicUpdate();
         if (isGrounded && player.CurrentVelocity.y < 0.01f) {
             stateMachine.ChangeState(player.IdleState);
+        } else if (player.InputHandler.JumpingInput) {
+            stateMachine.ChangeState(player.JumpState);
         }
-
     }
 
     public override void PhysicsUpdate()
@@ -62,7 +63,6 @@ public class PlayerInAirState : PlayerState
             {
                 isJumping = false;
             }
-
         }
     }
 
