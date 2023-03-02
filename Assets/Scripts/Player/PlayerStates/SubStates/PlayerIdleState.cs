@@ -22,9 +22,6 @@ public class PlayerIdleState : PlayerGroundedState
     public override void LogicUpdate() {
         base.LogicUpdate();
         if (player.InputHandler.XInput != 0) {
-            Debug.Log("Switch to MovingState");
-            Debug.Log("StateMachine: " + stateMachine);
-            Debug.Log("Desired State: " + player.MovingState);
             stateMachine.ChangeState(player.MovingState);
         }
     }

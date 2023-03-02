@@ -17,13 +17,19 @@ MonoBehaviour:
   acceleration: 9
   friction: 0.2
   jumpVelocity: 15
+  maxJumpHeight: 6
   amountOfJumps: 1
+  jumpCutMultiplier: 0.1
   wallJumpVelocity: 20
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 2}
   coyoteTime: 0.2
   variableJumpHeightMultiplier: 0.5
   airMovementVelocity: 15
+  fallMultiplier: 2.5
+  gravityScale: 1
+  maxAirSpeed: 10
+  minJumpTime: 0.2
   wallSlideVelocity: 3
   wallClimbVelocity: 3
   startOffset: {x: 0, y: 0}

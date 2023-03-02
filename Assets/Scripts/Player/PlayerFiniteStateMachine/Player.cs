@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
     public List<LayerMask> WhatIsGround;
     public Transform GroundCheck;
     public float GroundCheckRadius;
+    public List<LayerMask> WhatIsWall;
+    public Transform LeftWallCheck;
+    public Transform ReftWallCheck;
+    public float WallCheckRadius;
     public Rigidbody2D RB { get; private set; }
 
     [SerializeField]
@@ -23,8 +27,25 @@ public class Player : MonoBehaviour
     public bool IsGrounded { get  {
         foreach (LayerMask layer in WhatIsGround)
         {
-            if (Physics2D.OverlapCircle(GroundCheck.position, GroundCheckRadius, layer))
-            {
+            if(Physics2D.OverlapCircle(GroundCheck.position, GroundCheckRadius, layer)) {
+                return true;
+            }
+        }
+        return false;
+    } }
+    public bool TouchingLeftWall { get {
+        foreach(LayerMask wall in WhatIsWall)
+        {
+            if(Physics2D.OverlapCircle(LeftWallCheck.position, WallCheckRadius, wall)) {
+                return true;
+            }
+        }
+        return false;
+    } }
+    public bool TouchingRightWall { get {
+        foreach(LayerMask wall in WhatIsWall)
+        {
+            if(Physics2D.OverlapCircle(ReftWallCheck.position, WallCheckRadius, wall)) {
                 return true;
             }
         }

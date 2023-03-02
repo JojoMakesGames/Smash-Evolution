@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &302682215 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1645700250, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+  m_PrefabInstance: {fileID: 857406200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,11 +542,22 @@ MonoBehaviour:
     m_Bits: 256
   GroundCheck: {fileID: 592362512}
   GroundCheckRadius: 0.2
+  WhatIsWall:
+  - serializedVersion: 2
+    m_Bits: 2048
+  LeftWallCheck: {fileID: 2036043623}
+  ReftWallCheck: {fileID: 302682215}
+  WallCheckRadius: 0.2
   playerData: {fileID: 11400000, guid: 04a648a1321874cd784fce8246a2ca6f, type: 2}
 --- !u!19719996 &1628995423 stripped
 TilemapCollider2D:
   m_CorrespondingSourceObject: {fileID: 5218917694229304596, guid: 2f7fb0598ffaf489bb79539792410c2d, type: 3}
   m_PrefabInstance: {fileID: 5218917693010238352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2036043623 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1104274266, guid: ef450f93823d7440ca9cdb9f8ed88e63, type: 3}
+  m_PrefabInstance: {fileID: 857406200}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5218917693010238352
 PrefabInstance:
