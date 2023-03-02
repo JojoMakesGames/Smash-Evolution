@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerJumpState : PlayerAbilityState
 {
     private int amountOfJumpsLeft;
-    public bool canJump { get { return amountOfJumpsLeft > 0; }}
+    public bool CanJump { get { return player.InputHandler.JumpingInput && amountOfJumpsLeft > 0; }}
     private Vector2 workspace;
     public PlayerJumpState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName)
     {
@@ -20,9 +20,10 @@ public class PlayerJumpState : PlayerAbilityState
         player.RB.velocity = workspace;
         player.RB.AddForce(Vector2.up * Mathf.Sqrt(playerData.maxJumpHeight * -2f * Physics.gravity.y), ForceMode2D.Impulse);
         isAbilityDone = true;
-        amountOfJumpsLeft--;
+        DecreaseAmountOfJumpsLeft();
         player.InAirState.SetIsJumping();
     }
 
     public void ResetAmountOfJumpsLeft() => amountOfJumpsLeft = playerData.amountOfJumps;
+    public void DecreaseAmountOfJumpsLeft() => amountOfJumpsLeft--;
 }

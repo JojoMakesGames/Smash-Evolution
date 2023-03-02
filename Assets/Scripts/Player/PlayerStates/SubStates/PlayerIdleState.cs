@@ -15,6 +15,8 @@ public class PlayerIdleState : PlayerGroundedState
         base.LogicUpdate();
         if (player.InputHandler.XInput != 0) {
             stateMachine.ChangeState(player.MovingState);
+        } else if (player.CurrentVelocity.y < 0){
+            stateMachine.ChangeState(player.InAirState);
         }
     }
 }

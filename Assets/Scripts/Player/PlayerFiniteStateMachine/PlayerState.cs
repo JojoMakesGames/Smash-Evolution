@@ -19,9 +19,11 @@ public class PlayerState
     public virtual void Enter(){
         startTime = Time.time;
         player.Anim.SetBool(animBoolName, true);
+        Debug.Log("Enter " + animBoolName);
     }
     public virtual void Exit() {
         player.Anim.SetBool(animBoolName, false);
+        Debug.Log("Exit " + animBoolName);
     }
     public virtual void PhysicsUpdate() {
         DoChecks();

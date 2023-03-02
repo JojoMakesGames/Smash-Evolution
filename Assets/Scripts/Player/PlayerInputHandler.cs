@@ -11,12 +11,15 @@ public class PlayerInputHandler : MonoBehaviour
     public bool JumpingInput { get; private set; }
     public bool IsJumping { get; private set; }
     public bool JumpInputStop { get; private set; }
+    private float lastJumpInputTime;
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.time >= lastJumpInputTime + 0.2f) {
+            JumpingInput = false;
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context) {
@@ -28,6 +31,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context) {
         if (context.performed) {
+            lastJumpInputTime = Time.time;
             JumpingInput = true;
             IsJumping = true;
             JumpInputStop = false;

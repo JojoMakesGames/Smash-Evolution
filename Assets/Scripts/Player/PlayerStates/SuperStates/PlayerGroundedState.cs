@@ -25,6 +25,7 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.JumpState.ResetAmountOfJumpsLeft();
     }
 
     public override void Exit()
@@ -40,7 +41,7 @@ public class PlayerGroundedState : PlayerState
         } else if (player.InputHandler.XInput < 0 && player.FacingRight) {
             player.Flip();
         }
-        if(player.InputHandler.JumpingInput) {
+        if(player.JumpState.CanJump) {
             stateMachine.ChangeState(player.JumpState);
         }
     }

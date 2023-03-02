@@ -20,6 +20,7 @@ public class PlayerData : ScriptableObject
     [Header("Wall Jump State")]
     public float wallJumpVelocity = 20;
     public float wallJumpTime = 0.4f;
+    public float wallClingFriction = 0.5f;
     public Vector2 wallJumpAngle = new Vector2(1, 2);
 
     [Header("In Air State")]
@@ -33,6 +34,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Wall Slide State")]
     public float wallSlideVelocity = 3f;
+    public float wallClingGravity = 0.5f;
 
     [Header("Wall Climb State")]
     public float wallClimbVelocity = 3f;

@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     public PlayerSlidingStopState SlidingStopState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
     public PlayerJumpState JumpState { get; private set; }
+    public PlayerWallClingState WallClingState { get; private set; }
+    public PlayerWallJumpState WallJumpState { get; private set; }
 
     public bool IsGrounded { get  {
         foreach (LayerMask layer in WhatIsGround)
@@ -35,7 +37,7 @@ public class Player : MonoBehaviour
         }
         return false;
     } }
-    public bool TouchingLeftWall { get {
+    public bool IsTouchingLeftWall { get {
         foreach(LayerMask wall in WhatIsWall)
         {
             if(Physics2D.OverlapCircle(LeftWallCheck.position, WallCheckRadius, wall)) {
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
         }
         return false;
     } }
-    public bool TouchingRightWall { get {
+    public bool IsTouchingRightWall { get {
         foreach(LayerMask wall in WhatIsWall)
         {
             if(Physics2D.OverlapCircle(ReftWallCheck.position, WallCheckRadius, wall)) {
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour
         }
         return false;
     } }
+    public bool IsTouchingWall { get { return IsTouchingLeftWall || IsTouchingRightWall; } }
     public Vector2 CurrentVelocity { get { return RB.velocity; }}
 
 
@@ -68,7 +71,9 @@ public class Player : MonoBehaviour
         SlidingStopState = new PlayerSlidingStopState(this, playerData, "slideStop");
         InAirState = new PlayerInAirState(this, playerData, "inAir");
         JumpState = new PlayerJumpState(this, playerData, "jump");
-        StateMachine.Initialize(IdleState);
+        WallClingState = new PlayerWallClingState(this, playerData, "wallCling");
+        WallJumpState = new PlayerWallJumpState(this, playerData, "wallJump");
+        StateMachine.Initialize(InAirState);
     }
 
     void Update()

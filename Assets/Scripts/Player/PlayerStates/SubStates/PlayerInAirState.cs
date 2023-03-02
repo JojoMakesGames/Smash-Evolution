@@ -6,28 +6,26 @@ public class PlayerInAirState : PlayerState
 {
     private bool isJumping;
     private bool jumpInputStop { get { return player.InputHandler.JumpInputStop; } }
-    private bool isGrounded;
     private float targetSpeed;
     private float speedDiff;
     private float movement;
     private float minJumpTime;
+    private bool cutJump;
 
     public PlayerInAirState(Player player, PlayerData playerData, string animBoolName) : base(player, playerData, animBoolName)
     {
     }
     
-    public override void DoChecks()
-    {
-        base.DoChecks();
-        isGrounded = player.IsGrounded;
-    }
-
     public override void LogicUpdate() {
         base.LogicUpdate();
-        if (isGrounded && player.CurrentVelocity.y < 0.01f) {
+        if (player.IsGrounded && player.CurrentVelocity.y < 0.01f) {
             stateMachine.ChangeState(player.IdleState);
-        } else if (player.InputHandler.JumpingInput) {
+        } else if (player.JumpState.CanJump) {
             stateMachine.ChangeState(player.JumpState);
+        } else if (player.IsTouchingLeftWall && player.InputHandler.XInput > 0) {
+            stateMachine.ChangeState(player.WallClingState);
+        } else if (player.IsTouchingRightWall && player.InputHandler.XInput < 0) {
+            stateMachine.ChangeState(player.WallClingState);
         }
     }
 
@@ -54,14 +52,19 @@ public class PlayerInAirState : PlayerState
     {
         if (isJumping)
         {
-            if (jumpInputStop && playerData.minJumpTime < Time.time - startTime)
+            if (!cutJump) {
+                cutJump = jumpInputStop && Time.time - startTime < playerData.minJumpTime  ;
+            }
+            if (cutJump && playerData.minJumpTime < Time.time - startTime)
             {
                 player.RB.AddForce(Vector2.down * player.RB.velocity.y * (1 - playerData.jumpCutMultiplier), ForceMode2D.Impulse);
                 isJumping = false;
+                cutJump = false;
             }
             else if (player.CurrentVelocity.y <= 0f)
             {
                 isJumping = false;
+                cutJump = false;
             }
         }
     }
